@@ -73,10 +73,10 @@ with st.expander(' :notebook: Portfolio'):
                 project_name = st.text_input("Project Name")
                 delete = st.button("Delete")
                 if delete:
-                    # cur.execute(f"DELETE FROM portfolio WHERE project_name = '{project_name}';")
-                    SQL = "DELETE FROM portfolio WHERE project_name = %s;"
-                    data = (project_name)
-                    cur.execute(SQL, data)
+                    cur.execute(f"DELETE FROM portfolio WHERE project_name = '{project_name}';")
+                    # SQL = "DELETE FROM portfolio WHERE project_name = %s;"
+                    # data = (project_name)
+                    # cur.execute(SQL, data)
                     con.commit()
                     st.success("Successfully Deleted.")
                     st.button(":blue[Done]")
@@ -246,7 +246,7 @@ with st.expander(' :link: External Links'):
 agent = st.checkbox(' :computer: Agent (Talk to my Intelligent Assistant :technologist:)')
 # agent = st.toggle(' :computer: Agent (Talk to my Intelligent Assistant :technologist:)')
 if agent:
-    vertexai.init(project="matt-project-training", location="us-central1")
+    vertexai.init(project=PROJECT_NAME, location="us-central1")
     parameters = {
         "candidate_count": 1,
         "max_output_tokens": 1024,
